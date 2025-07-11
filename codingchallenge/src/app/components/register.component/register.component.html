@@ -1,0 +1,49 @@
+<div class="signup-card">
+  <div *ngIf="success" class="alert alert-success">
+    Registration successful!
+  </div>
+
+  <div class="card-title">
+    <h1>Create Account</h1>
+    <span>Already have an account? <a routerLink="/login">Sign In</a></span>
+  </div>
+
+  <form class="form-group" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <input type="text" placeholder="Name" formControlName="name" />
+    <div class="text-danger" *ngIf="signupForm.controls['name'].touched && signupForm.controls['name'].hasError('required')">
+      Name is required
+    </div>
+
+    <input type="text" placeholder="Username" formControlName="username" />
+    <div class="text-danger" *ngIf="signupForm.controls['username'].touched && signupForm.controls['username'].hasError('required')">
+      Username is required
+    </div>
+
+    <input type="password" placeholder="Password" formControlName="password" />
+    <div class="text-danger" *ngIf="signupForm.controls['password'].touched && signupForm.controls['password'].hasError('required')">
+      Password is required
+    </div>
+
+    <input type="text" placeholder="Address" formControlName="address" />
+    <div class="text-danger" *ngIf="signupForm.controls['address'].touched && signupForm.controls['address'].hasError('required')">
+      Address is required
+    </div>
+
+    <input type="text" placeholder="Mobile No" formControlName="mobileno" />
+    <div class="text-danger" *ngIf="signupForm.controls['mobileno'].touched && signupForm.controls['mobileno'].hasError('required')">
+      Mobile No is required
+    </div>
+
+    <input type="number" placeholder="Age" formControlName="age" />
+    <div class="text-danger" *ngIf="signupForm.controls['age'].touched && signupForm.controls['age'].hasError('required')">
+      Age is required
+    </div>
+
+    <input type="submit" [disabled]="!signupForm.valid" value="Sign Up" />
+  </form>
+
+  <div class="card-terms">
+    <input type="checkbox" />
+    <span>I have read and agree to the <a href="#">Terms of Service</a></span>
+  </div>
+</div>

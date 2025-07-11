@@ -1,0 +1,84 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="text-primary">📚 Book List</h2>
+    <a routerLink="/addbook" class="btn btn-success shadow-sm px-4">
+      Add New Book
+    </a>
+  </div>
+
+  <div class="card shadow-lg border-0 rounded-4">
+    <div class="card-body p-4">
+      <table class="table table-hover table-striped align-middle text-center">
+        <thead class="table-dark">
+          <tr>
+            <th>ISBN</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Publication Year</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let book of books">
+            <td>{{ book.isbn }}</td>
+            <td>{{ book.title }}</td>
+            <td>{{ book.author }}</td>
+            <td>{{ book.publicationYear }}</td>
+            <td>
+              <button class="btn btn-sm btn-primary me-2" (click)="editBook(book)">
+                 Edit
+              </button>
+              <button class="btn btn-sm btn-danger" (click)="deleteBook(book.isbn)">
+                 Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div *ngIf="selectedBook" class="card mt-5 shadow border-0 rounded-4">
+    <div class="card-header bg-warning text-dark fw-bold fs-5">
+       Edit Book
+    </div>
+    <div class="card-body p-4">
+      <form [formGroup]="editForm" (ngSubmit)="updateBook()">
+        <div class="mb-3">
+          <label for="isbn" class="form-label">ISBN</label>
+          <input id="isbn" formControlName="isbn" class="form-control" [disabled]="true" />
+        </div>
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input id="title" formControlName="title" class="form-control" />
+        </div>
+        <div class="mb-3">
+          <label for="author" class="form-label">Author</label>
+          <input id="author" formControlName="author" class="form-control" />
+        </div>
+        <div class="mb-3">
+          <label for="publicationYear" class="form-label">Publication Year</label>
+          <input
+            type="number"
+            id="publicationYear"
+            formControlName="publicationYear"
+            class="form-control"
+          />
+        </div>
+
+        <div class="d-flex gap-3 mt-3">
+          <button type="submit" class="btn btn-success shadow-sm">
+             Update Book
+          </button>
+          <button type="button" class="btn btn-secondary shadow-sm" (click)="cancelEdit()">
+            ❌ Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div *ngIf="message" class="alert alert-info mt-4 shadow-sm">
+    {{ message }}
+  </div>
+</div>
